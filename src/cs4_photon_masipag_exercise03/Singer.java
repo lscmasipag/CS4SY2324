@@ -20,7 +20,7 @@ public class Singer {
         noOfPerformances = 0;
         earnings = 0.00;
     }
-
+    
     public void performForAudience(int numberOfPeople, int numberOfSingers){
         noOfPerformances += 1;
         totalPerformances += 1;
@@ -29,6 +29,26 @@ public class Singer {
         System.out.println(name + " performed " + noOfPerformances + " time/s" + " and earned Php " + earnings + " already.");
     }
 
+    public void performForAudience(int numberOfPeople, int numberOfSingers, Singer otherSinger) {
+        noOfPerformances += 2;
+        totalPerformances += 1;
+        double totalEarnings = (numberOfPeople * 100.00) / numberOfSingers;
+        earnings += totalEarnings;
+        otherSinger.earnings += totalEarnings;
+
+        System.out.println(name + " and " + otherSinger.getName() + " sang " + favoriteSong + ", to an audience of " + numberOfPeople + " people.");
+        System.out.println(name + " performed " + noOfPerformances + " time/s already and earned Php " + earnings + ".");
+        System.out.println(otherSinger.getName() + " also performed and has now earned Php " + otherSinger.getEarnings() + ".");
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public double getEarnings(){
+        return earnings;
+    }
+    
     public void changeFavSong(String newFavSong){
         favoriteSong = newFavSong;
         System.out.println(name + "' new favorite song is " + favoriteSong + ".");

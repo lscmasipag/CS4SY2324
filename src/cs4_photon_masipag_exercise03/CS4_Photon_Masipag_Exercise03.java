@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package cs4_photon_masipag_exercise03;
 
@@ -8,53 +8,37 @@ package cs4_photon_masipag_exercise03;
  *
  * @author Lance Masipag
  */
-public class Singer {
-    private String name;
-    private int noOfPerformances;
-    private double earnings;
-    private String favoriteSong;
-    private static int totalPerformances = 0;
+public class CS4_Photon_Masipag_Exercise03 {
 
-    public Singer(String n){
-        name = n;
-        noOfPerformances = 0;
-        earnings = 0.00;
-    }
-    
-    public void performForAudience(int numberOfPeople, int numberOfSingers){
-        noOfPerformances += 1;
-        totalPerformances += 1;
-        earnings += (numberOfPeople * 100.00)/numberOfSingers;
-        System.out.println(name + " sang " + favoriteSong + ", to an audience of " + numberOfPeople + " people.");
-        System.out.println(name + " performed " + noOfPerformances + " time/s" + " and earned Php " + earnings + " already.");
-    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Genre genre1 = new Genre("Reggae");
+        Genre genre2 = new Genre("Pop");
+        Genre genre3 = new Genre("Funk");
+        Song song1 = new Song("The Lazy Song","Bruno Mars");
+        Song song2 = new Song("When I was Your Man","Bruno Mars");
+        Song song3 = new Song("Finesse","Bruno Mars");
+        Singer singer1 = new Singer("Bruno Mars");
+        Singer singer2 = new Singer("Cardi B");
 
-    public void performForAudience(int numberOfPeople, int numberOfSingers, Singer otherSinger) {
-        noOfPerformances += 2;
-        totalPerformances += 1;
-        double totalEarnings = (numberOfPeople * 100.00) / numberOfSingers;
-        earnings += totalEarnings;
-        otherSinger.earnings += totalEarnings;
-
-        System.out.println(name + " and " + otherSinger.getName() + " sang " + favoriteSong + ", to an audience of " + numberOfPeople + " people.");
-        System.out.println(name + " performed " + noOfPerformances + " time/s already and earned Php " + earnings + ".");
-        System.out.println(otherSinger.getName() + " also performed and has now earned Php " + otherSinger.getEarnings() + ".");
-    }
-    
-    public String getName(){
-        return name;
-    }
-    
-    public double getEarnings(){
-        return earnings;
-    }
-    
-    public void changeFavSong(String newFavSong){
-        favoriteSong = newFavSong;
-        System.out.println(name + "' new favorite song is " + favoriteSong + ".");
-    }
-    
-    public static int totalPerformances(){
-        return totalPerformances;
+        song1.printTitleArtist();
+        genre1.printGenre();
+        singer1.changeFavSong("The Lazy Song");
+        singer1.performForAudience(12,1);
+        
+        song2.printTitleArtist();
+        genre2.printGenre();
+        singer1.changeFavSong("When I was Your Man");
+        singer1.performForAudience(10,1);
+        
+        song3.printTitleArtist();
+        singer1.changeFavSong("Finesse");
+        singer2.changeFavSong("Finesse");
+        singer1.performForAudience(15,2, singer2);
+        
+        System.out.println("\nThe total performances of all the singers is " + Singer.totalPerformances() + ".");
     }
 }

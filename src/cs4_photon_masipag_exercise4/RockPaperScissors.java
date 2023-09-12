@@ -143,11 +143,12 @@ public class RockPaperScissors {
                 currentRound = 1;
                 userWins = 0;
                 computerWins = 0;
-            } else {
+            } else if (userWins < computerWins){
                 System.out.println("Computer wins the game. Try again!\n");
                 currentRound = 1;
                 userWins = 0;
                 computerWins = 0;
+            } else {
             }
             counter++;
         }

@@ -12,10 +12,10 @@ package cs4_photon_masipag_exercise06;
 import java.util.ArrayList;
 public class Monster {
     private final String name, type, strongAgainst, weakAgainst;
-    private int maxHP, hp, atk, def, xp, lvl;
+    protected int maxHP, hp, atk, def, xp, lvl;
     private boolean guard, charge;
     private static ArrayList<Monster> monsterList = new ArrayList<>();
-
+    
     public Monster(String n, String t, String s, String w, int m, int base){
         name = n;
         type = t;
@@ -23,8 +23,26 @@ public class Monster {
         weakAgainst = w;
         maxHP = m;
         hp = m;
-        atk = base;
-        def = base;
+        
+        //switch case for corresponding attack and defense of each type
+        switch(t){
+            case "fire":
+                atk = (int) (1.3 * base);
+                def = (int) (0.7 * base);
+                break;
+            case "grass":
+                atk = base;
+                def = base;
+                break;
+            case "water":
+                atk = (int) (0.7 * base);
+                def = (int) (1.3 * base);
+                break;
+            default:
+                atk = base;
+                def = base;
+        }
+        
         xp = 0;
         lvl = 1;
         monsterList.add(this);
@@ -34,6 +52,10 @@ public class Monster {
 
     public String getName() {
         return name;
+    }
+    //added getter method for the type of monster
+    public String getType() {
+        return type;
     }
     public int getMaxHP() {
         return maxHP;
@@ -72,16 +94,16 @@ public class Monster {
         }
         m.hp -= damage;
         if(m.hp < 0) m.hp = 0;
-            System.out.println(name  + " attacked " + m.getName() +
-            " and dealt " + damage + " damage, reducing it to " + m.getHP() + "HP.");
+        System.out.println(name + " attacked " + m.getName() +
+        " and dealt " + damage + " damage, reducing it to " + m.getHP() + "HP.");
         if(strong) System.out.println("It was super effective!\n");
         if(weak) System.out.println("It wasn't very effective...\n");
         gainXP(2);                                                  // every attack raises XP by 2
 
         if(m.getHP() <= 0){
             m.hp = 0;
-            System.out.println(m.getName() + " fainted.");
-            gainXP(10);                                             // defeating a monster raises XP by 10
+            System.out.println(m.getName() + " fainted.\n");
+            gainXP(10);                                            // defeating a monster raises XP by 10
         }
     }
 
@@ -109,6 +131,42 @@ public class Monster {
         hp = maxHP;
     }
 
+    //added a method for the monster to perform an action based on chance
+    public void performRandomAction(Monster m, double action, String atkOrDef) {
+        if (action >= 0.0 && action < 0.5);
+        else if (action >= 0.5 && action < 0.8) {
+            if (atkOrDef.equals("atk")){
+                m.charge();
+            }
+            else if (atkOrDef.equals("def")){
+                m.guard();
+            }
+        } 
+        else if (action >= 0.8 && action < 0.9) {
+            switch (m.getType()) {
+                case "fire":
+                    if (atkOrDef.equals("atk")){
+                        m.special();
+                    }
+                    else if (atkOrDef.equals("def"));
+                    break;
+                case "water":
+                    if (atkOrDef.equals("atk"));
+                    else if (atkOrDef.equals("def")){
+                        m.special();
+                    }   break;
+                case "grass":
+                    m.special();
+                    break;
+                default:
+                    break;
+            }
+        } 
+        else {
+            m.rest();
+        }
+    }
+    
     // handles all increases in XP
     private void gainXP(int i){
         xp += i;

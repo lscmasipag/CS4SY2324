@@ -9,13 +9,9 @@ package cs4_photon_masipag_exercise06;
  * @author Lance Masipag
  */
 public class GrassType extends Monster{
-    //public int initialMaxHP;
     public GrassType(String name, int maxHP, int base) {
         super(name, "grass", "water", "fire", maxHP, base);
     }
-    //public void resetMaxHP(){
-        //maxHP = initialMaxHP;
-    //}
     @Override
     public void special() {
         super.special();

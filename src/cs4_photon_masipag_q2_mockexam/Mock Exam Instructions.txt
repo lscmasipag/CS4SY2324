@@ -1,0 +1,34 @@
+Scenario:
+	Bands increase their popularity by performing at different venues. Venues could be either Stadiums or Theaters. Theaters have multiple available locations. Bands can check the availability of the venues. Once checked, they can perform at the selected venue. Indie bands are a kind of band that have 0 popularity when they start but gain twice as much popularity when performing at a venue with the same location as their origin. Both Venues and IndieBands are SelfPromoting, such that they can advertise themselves.
+	
+	You may make changes to the files as needed. You may make use of the main method as a means for debugging and checking if your implementations work.
+
+Checklist:
+
+Venue
+	Make Venue an abstract class
+	Make abstract method checkAvailability() which returns a boolean value
+	Make abstract method reserve()
+	Make abstract method hostEvent()
+Theater
+	Make Theater a subclass of Venue
+	Remove redundancies with superclass
+	Define checkAvailability() such that if numStages is greater than 0, it returns true. If numStages is 0, return false
+	Define reserve() such that numStages is reduced by 1
+	Define hostEvent() such that numStages is increased by 1
+Stadium
+	Make Stadium a subclass of Venue
+	Remove redundancies with superclass
+	Define checkAvailability() such that it returns the value of reserved.
+	Define reserve() such that the value of reserved set to true
+	Define hostEvent() such that the value of reserved set to false
+IndieBand
+	Make IndieBand a subclass of Band
+	Remove redundancies with superclass
+	Override the perform() method such that if the Venue location is the same as the IndieBand’s origin, popularity increase is doubled
+SelfPromoting
+	Create an interface called SelfPromoting
+	Make abstract method advertise()
+	Apply the interface to Venue and IndieBand
+		When a Venue advertises, it increases its value by 2
+		When an IndieBand advertises, it's popularity is increased by 1 for every 10 performances
